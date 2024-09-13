@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -7,7 +7,32 @@ import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 
-const showingNavigationDropdown = ref(false);
+// Référence pour stocker l'état du dark mode
+const darkMode = ref(false);
+
+// Vérifier si le dark mode est activé dans le localStorage
+onMounted(() => {
+    const darkModeStorage = localStorage.getItem('darkMode');
+    if (darkModeStorage === 'true' || (!darkModeStorage && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        darkMode.value = true;
+        document.documentElement.classList.add('dark');
+    } else {
+        darkMode.value = false;
+        document.documentElement.classList.remove('dark');
+    }
+});
+
+// Fonction pour basculer entre le mode sombre et le mode clair
+const toggleDarkMode = () => {
+    darkMode.value = !darkMode.value;
+    if (darkMode.value) {
+        document.documentElement.classList.add('dark');  // Ajoute la classe 'dark' sur <html>
+        localStorage.setItem('darkMode', 'true');        // Stocke la préférence dans le localStorage
+    } else {
+        document.documentElement.classList.remove('dark'); // Supprime la classe 'dark'
+        localStorage.setItem('darkMode', 'false');       // Stocke la préférence dans le localStorage
+    }
+};
 </script>
 
 <template>
@@ -36,6 +61,10 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="checkbox" value="" class="sr-only peer">
+                                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none  peer-focus:ring-gray-300 dark:peer-focus:ring-gray-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gray-200" @click="toggleDarkMode"></div>
+                            </label>
                             <!-- Settings Dropdown -->
                             <div class="ms-3 relative">
                                 <Dropdown align="right" width="48">
