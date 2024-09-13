@@ -20,17 +20,8 @@ class Employee extends Model
         'first_name',
         'last_name',
         'email',
-        'Onboarding_status',
+        'onboarding_status',
     ];
-
-    public function setStatusAttribute($value)
-    {
-        if (in_array($value, EmployeeStatus::getValues())) {
-            $this->attributes['Onboarding_status'] = $value;
-        } else {
-            throw new InvalidArgumentException("Invalid status");
-        }
-    }
 
     public function contracts(): HasMany
     {

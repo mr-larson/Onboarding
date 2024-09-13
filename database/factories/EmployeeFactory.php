@@ -21,13 +21,7 @@ class EmployeeFactory extends Factory
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'email' => $this->faker->unique()->safeEmail,
-            'Onboarding_status' => $this->faker->randomElement([
-                EmployeeStatus::Onboarding,
-                EmployeeStatus::Active,
-                EmployeeStatus::Inactive,
-                EmployeeStatus::Suspended,
-                EmployeeStatus::Terminated,
-            ]),
+            'onboarding_status' => 'Active',
         ];
     }
 }

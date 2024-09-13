@@ -22,18 +22,18 @@ const props = defineProps({
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                     <!-- Boucle sur les sociétés -->
                     <div v-for="company in companies" :key="company.id" class="mb-6">
-                        <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ company.name }}</h3>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100"> Company : {{ company.name }}</h3>
 
                         <!-- Boucle sur les établissements -->
                         <div v-for="establishment in company.establishments" :key="establishment.id" class="mt-4">
-                            <h4 class="text-xl font-semibold text-gray-800 dark:text-gray-200">{{ establishment.name }}</h4>
+                            <h4 class="text-xl font-semibold text-gray-400 dark:text-gray-200"> Establishment : {{ establishment.name }}</h4>
 
                             <!-- Boucle sur les employés -->
                             <div class="mt-3">
                                 <h5 class="font-semibold text-lg">Employés</h5>
                                 <ul class="list-disc ml-5 text-gray-900 dark:text-gray-100">
                                     <li v-for="employee in establishment.employees" :key="employee.id">
-                                        {{ employee.first_name }} {{ employee.last_name }} ({{ employee.status }})
+                                        {{ employee.first_name }} {{ employee.last_name }} ({{ employee.onboarding_status }})
 
                                         <!-- Boucle sur les contrats -->
                                         <ul class="list-disc ml-5">

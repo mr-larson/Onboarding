@@ -2,22 +2,11 @@
 
 namespace App\Http\Enums;
 
-enum EmployeeStatus
+enum EmployeeStatus: string
 {
-    case Onboarding;
-    case Active;
-    case Inactive;
-    case Suspended;
-    case Terminated;
-
-    public static function getValues(): array
-    {
-        return [
-            self::Onboarding,
-            self::Active,
-            self::Inactive,
-            self::Suspended,
-            self::Terminated,
-        ];
-    }
+    case Onboarding = 'Onboarding';
+    case Active = 'Active';
+    case Inactive = 'Inactive';
+    case Suspended = 'Suspended';
+    case Terminated = 'Terminated';
 }
