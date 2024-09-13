@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('employee_id')->constrained()->onDelete('cascade');
+            $table->foreignId('establishment_id')->constrained()->onDelete('cascade');
+            $table->string('contract_type')->default('CDI');
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('contracts');
     }
 };

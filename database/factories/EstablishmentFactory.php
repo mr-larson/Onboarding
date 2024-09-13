@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Company>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Establishment>
  */
-class CompanyFactory extends Factory
+class EstablishmentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,6 +19,7 @@ class CompanyFactory extends Factory
     {
         return [
             'name' => $this->faker->company,
+            'company_id' => Company::factory(),
         ];
     }
 }
